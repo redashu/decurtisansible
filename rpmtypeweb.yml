@@ -1,0 +1,14 @@
+---
+ - hosts: apache
+   tasks:
+    - name: installing  apache server on centos machine 
+      yum: name=httpd state=present
+
+    - name: copying  index file to target 
+      copy: src=/root/abc.html dest=/var/www/html/index.html owner=root mode=0644
+
+    - name:  starting  service of httpd  and making it per
+      service: name=httpd state=restarted enabled=yes
+
+    - name: firewall rule flushing 
+      shell: 'iptables -F'

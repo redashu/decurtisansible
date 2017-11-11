@@ -1,0 +1,14 @@
+---
+ - hosts: apache
+   tasks:
+    - name: installing  ftp server on centos machine 
+      yum: name=vsftpd state=present
+
+    - name:  starting  service of httpd  and making it per
+      service: name=vsftpd state=restarted enabled=yes
+
+    - name: firewall rule flushing 
+      shell: 'iptables -F'
+
+    - name: creating  ftp  user
+      user: name=user1 state=present shell=/sbin/nologin password='$1$0q/kMDYi$fCF5xgCzgdPya1u3vR4mp/'
