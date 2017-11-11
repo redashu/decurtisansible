@@ -1,0 +1,12 @@
+---
+ - hosts: all
+   remote_user: root
+   tasks:
+    - name: Installing  KVM  command line like aws
+      yum: name=virt-install state=present
+      when: ( ansible_os_family == 'RedHat')  
+
+
+    - name: Launching  vms
+      shell: 'virt-install  --name  ubos1  --ram  1024  --vcpu 1 --nodisk   --cdrom /ub.iso'
+      when: ( ansible_os_family == 'RedHat')  

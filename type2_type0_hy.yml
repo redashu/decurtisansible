@@ -1,0 +1,24 @@
+---
+ - hosts: all
+   tasks:
+    - name: installing  QEMU-KVM on centos os box
+      yum: name="{{ item }}" state=present
+      with_items:
+       - qemu-kvm
+       - libvirt
+       - virt-manager
+      when: ansible_os_family == 'RedHat'
+
+    - name: starting  service of  libvirt daemon
+      service: name=libvirtd state=restarted  enabled=yes
+      when: ansible_os_family == 'RedHat'
+
+    - name: adding docker keys
+      shell: 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - ; sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" ; apt-get update'
+      when: ansible_os_family == 'Debian'
+
+    - name:  installing  docker
+      apt: name=docker-ce  state=present
+      when: ansible_os_family == 'Debian'
+
+    

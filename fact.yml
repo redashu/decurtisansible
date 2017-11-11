@@ -1,0 +1,7 @@
+---
+ - hosts: ubuntu
+   remote_user: ubuntu
+   tasks:
+    - name: copying  index file to target 
+      shell: 'whoami'
+

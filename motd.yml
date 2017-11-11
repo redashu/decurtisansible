@@ -1,0 +1,10 @@
+---
+ - hosts: all
+   remote_user: root
+   vars:
+    - msg: "good morining india"
+    - msg1: "good morining india with Ansible"
+   tasks:
+    - name: chaning message values
+      copy: content="{{ msg }}" dest=/etc/motd
+
