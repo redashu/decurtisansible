@@ -1,0 +1,19 @@
+---
+ - hosts: all
+   remote_user: root
+   tasks:
+    - name: creating  multiple users 
+      user: name="{{ item }}"  state=present password="{{ item | password_hash('sha512') }}"
+      with_items: 
+       - user2
+       - user3
+       - user4
+       - user5
+
+    - name: installing  software
+      yum: name="{{ item }}"  state=present 
+      with_items: 
+       - telnet
+       - vsftpd
+       - mutt
+       - screen
