@@ -1,0 +1,7 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: pulling an image
+      docker_container: name=nginx2 state=started image=nginx expose=80 detach=True tty=yes count=3
+      register: x
+    - debug: var=x
