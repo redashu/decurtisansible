@@ -1,0 +1,14 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: launch
+      ec2:
+       key_name: awskey
+       wait: yes
+       image: ami-2ed19c41
+       instance_type: t2.micro
+       group: ansible
+       region: ap-south-1
+      register: os
+    - name: to filter data 
+      debug: msg="my instance id  is   {{ os.instance_ids  }}"
